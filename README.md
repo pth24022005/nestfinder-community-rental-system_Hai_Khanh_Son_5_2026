@@ -2,7 +2,7 @@
 
 Dự án ứng dụng di động/web được xây dựng bằng **Flutter**, hỗ trợ người dùng tìm kiếm và quản lý thông tin phòng trọ, chung cư mini trong khu vực.
 
-##  Thành viên nhóm phát triển (Nhóm 5)
+##  Thành viên nhóm phát triển 
 1. **Hải** - MSSV: 23010677
 2. **Khánh** - MSSV: 22010487 
 3. **Sơn** - MSSV: 23010878
