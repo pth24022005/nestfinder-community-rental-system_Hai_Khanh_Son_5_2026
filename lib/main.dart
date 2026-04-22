@@ -1,19 +1,6 @@
 import 'package:flutter/material.dart';
-
-// Khai báo một Lớp (Class) đại diện cho Đối tượng Phòng trọ
-class Room {
-  final String title;
-  final String address;
-  final double price;
-  final double area;
-
-  Room({
-    required this.title,
-    required this.address,
-    required this.price,
-    required this.area,
-  });
-}
+import 'room.dart';
+import 'list_room.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,72 +11,141 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'NestFinder',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'NestFinder'),
-    );
+    return const MaterialApp(title: 'NestFinder', home: MyHomePage());
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Sử dụng List chứa các Đối tượng
-  final List<Room> rooms = [
-    Room(
-      title: 'Phòng trọ sinh viên',
-      address: '123 Đường Xuân Thủy, Cầu Giấy, Hà Nội',
-      price: 2500000.0,
-      area: 20.5,
-    ),
-    Room(
-      title: 'Phòng trọ có ban công',
-      address: '456 Đường Nguyễn Trãi, Thanh Xuân, Hà Nội',
-      price: 3200000.0,
-      area: 25.0,
-    ),
-    Room(
-      title: 'Chung cư mini',
-      address: '789 Đường Hồ Tùng Mậu, Nam Từ Liêm, Hà Nội',
-      price: 4500000.0,
-      area: 30.0,
-    ),
-  ];
+  final ListRoom roomManager = ListRoom();
+
+  // Các biến điều khiển nhập liệu
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+
+  // Hàm hiển thị hộp thoại Thêm hoặc Sửa
+  void _showRoomDialog({Room? room}) {
+    // Nếu là sửa, nạp dữ liệu cũ vào ô nhập
+    if (room != null) {
+      _idController.text = room.id;
+      _titleController.text = room.title;
+      _priceController.text = room.price.toString();
+    } else {
+      _idController.clear();
+      _titleController.clear();
+      _priceController.clear();
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(room == null ? 'Thêm phòng mới' : 'Sửa thông tin'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (room == null)
+              TextField(
+                controller: _idController,
+                decoration: const InputDecoration(labelText: 'Mã ID'),
+              ),
+            TextField(
+              controller: _titleController,
+              decoration: const InputDecoration(labelText: 'Tên phòng'),
+            ),
+            TextField(
+              controller: _priceController,
+              decoration: const InputDecoration(labelText: 'Giá thuê'),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Hủy'),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                if (room == null) {
+                  // Chức năng CREATE
+                  roomManager.addRoom(
+                    Room(
+                      id: _idController.text,
+                      title: _titleController.text,
+                      address: 'Địa chỉ mặc định',
+                      price: double.tryParse(_priceController.text) ?? 0.0,
+                      area: 20.0,
+                    ),
+                  );
+                } else {
+                  // Chức năng UPDATE
+                  roomManager.editRoom(
+                    room.id,
+                    _titleController.text,
+                    double.tryParse(_priceController.text) ?? 0.0,
+                  );
+                }
+              });
+              Navigator.pop(context);
+            },
+            child: const Text('Lưu'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Chức năng READ
+    final rooms = roomManager.getAllRooms();
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text('Hệ thống NestFinder'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () => _showRoomDialog(),
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          //hiển thị dữ liệu theo dạng hàng
-          children: <Widget>[
-            // Dùng vòng lặp for để duyệt qua List và in ra các phần tử
-            for (var room in rooms)
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                // Gộp 4 thông tin vào 1 widget
-                child: Text(
-                  'Tiêu đề: ${room.title}\nĐịa chỉ: ${room.address}\nGiá thuê: ${room.price} VNĐ/tháng\nDiện tích: ${room.area} m²',
+      body: ListView.builder(
+        itemCount: rooms.length,
+        itemBuilder: (context, index) {
+          final room = rooms[index];
+          return ListTile(
+            title: Text('Phòng: ${room.title} (ID: ${room.id})'),
+            subtitle: Text('Giá: ${room.price} VNĐ'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Nút sửa
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () => _showRoomDialog(room: room),
                 ),
-              ),
-          ],
-        ),
+                // Chức năng DELETE
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    setState(() {
+                      roomManager.deleteRoom(room.id);
+                    });
+                  },
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
