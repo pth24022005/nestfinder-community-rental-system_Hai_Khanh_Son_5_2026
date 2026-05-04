@@ -10,10 +10,10 @@ Dự án ứng dụng di động/web được xây dựng bằng **Flutter**, h�
 ##  Các chức năng chính (CRUD)
 Dự án đã triển khai đầy đủ các thao tác quản lý dữ liệu cơ bản (CRUD) áp dụng trên đối tượng `Room` (Phòng trọ):
 
-* **[C]reate (Thêm mới):** Khởi tạo và đăng thông tin phòng trọ mới lên hệ thống thông qua giao diện nhập liệu.
-* **[R]ead (Đọc/Hiển thị):** Truy xuất và hiển thị danh sách toàn bộ phòng trọ hiện có bằng giao diện `ListView` trực quan.
-* **[U]pdate (Cập nhật):** Chỉnh sửa thông tin phòng (đổi tên phòng, cập nhật lại giá thuê) dựa trên mã ID.
-* **[D]elete (Xóa):** Gỡ bỏ một phòng trọ khỏi hệ thống.
+* **Create (Thêm mới):** Khởi tạo và đăng thông tin phòng trọ mới lên hệ thống thông qua giao diện nhập liệu.
+* **Read (Đọc/Hiển thị):** Truy xuất và hiển thị danh sách toàn bộ phòng trọ hiện có bằng giao diện `ListView` trực quan.
+* **Update (Cập nhật):** Chỉnh sửa thông tin phòng (đổi tên phòng, cập nhật lại giá thuê) dựa trên mã ID.
+* **Delete (Xóa):** Gỡ bỏ một phòng trọ khỏi hệ thống.
 
 ##  Cấu trúc mã nguồn chính
 * `lib/room.dart`: Chứa Lớp (Class) `Room` định nghĩa cấu trúc đối tượng Phòng trọ (gồm ID, tên, địa chỉ, giá, diện tích).
