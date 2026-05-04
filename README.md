@@ -18,4 +18,7 @@ Dự án đã triển khai đầy đủ các thao tác quản lý dữ liệu c�
 ##  Cấu trúc mã nguồn chính
 * `lib/room.dart`: Chứa Lớp (Class) `Room` định nghĩa cấu trúc đối tượng Phòng trọ (gồm ID, tên, địa chỉ, giá, diện tích).
 * `lib/list_room.dart`: Chứa Lớp `ListRoom` đóng vai trò là kho lưu trữ dữ liệu tập trung và xử lý các logic Thêm, Sửa, Xóa.
-* `lib/main.dart`: Chứa giao diện người dùng (UI) và các chức năng tương tác (Dialog) để gọi tới kho dữ liệu.
+* `lib/main.dart`: Cấu hình ứng dụng chính và thiết lập thanh điều hướng dưới cùng (BottomNavigationBar).
+* `lib/home_page.dart`: Chứa giao diện chính hiển thị danh sách phòng trọ và các hộp thoại (Dialog) để Thêm, Sửa, Xóa.
+* `lib/content_page.dart`: Hiển thị các bài viết chia sẻ kinh nghiệm thuê phòng.
+* `lib/about_page.dart`: Hiển thị thông tin giới thiệu về ứng dụng và danh sách thành viên nhóm phát triển.

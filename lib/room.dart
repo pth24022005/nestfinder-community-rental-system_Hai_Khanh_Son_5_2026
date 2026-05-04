@@ -4,7 +4,7 @@ class Room {
   String address;
   double price;
   double area;
-  bool isRented; // Thêm trạng thái để biết phòng đã có người thuê chưa
+  bool isRented; // trạng thái để biết phòng đã có người thuê chưa
 
   Room({
     required this.id,
