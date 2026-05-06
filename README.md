@@ -4,8 +4,8 @@ Dự án ứng dụng di động/web được xây dựng bằng **Flutter**, h�
 
 ##  Thành viên nhóm phát triển 
 1. **Hải** - MSSV: 23010677
-2. **Khánh** - MSSV: 22010487 
-3. **Sơn** - MSSV: 23010878
+2. **Khánh** - MSSV: 22010487 (Phụ trách phát triển Trang chủ - `home_page.dart`)
+3. **Sơn** - MSSV: 23010878 (Phụ trách phát triển Trang giới thiệu - `about_page.dart`)
 
 ##  Các chức năng chính (CRUD)
 Dự án đã triển khai đầy đủ các thao tác quản lý dữ liệu cơ bản (CRUD) áp dụng trên đối tượng `Room` (Phòng trọ):
@@ -22,3 +22,8 @@ Dự án đã triển khai đầy đủ các thao tác quản lý dữ liệu c�
 * `lib/home_page.dart`: Chứa giao diện chính hiển thị danh sách phòng trọ và các hộp thoại (Dialog) để Thêm, Sửa, Xóa.
 * `lib/content_page.dart`: Hiển thị các bài viết chia sẻ kinh nghiệm thuê phòng.
 * `lib/about_page.dart`: Hiển thị thông tin giới thiệu về ứng dụng và danh sách thành viên nhóm phát triển.
+
+##  Tiến độ cập nhật giao diện
+* Hiện tại, `home_page.dart` đã được nâng cấp thành một **Landing Page (Trang chủ)** với thiết kế Responsive (tự động co giãn), hiển thị tốt trên cả nền tảng Web và thiết bị di động.
+* Giao diện được bổ sung đầy đủ thanh điều hướng (Header), Form liên hệ và Chân trang (Footer).
+* Trang **Giới thiệu (`about_page.dart`)** cũng đã được hoàn thiện với thiết kế Responsive, hiển thị thông tin chi tiết về dự án NestFinder, danh sách thành viên nhóm và mô tả các chức năng cốt lõi.
